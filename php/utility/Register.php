@@ -1,0 +1,67 @@
+<?php
+declare(strict_types=1);
+
+// IbanValidation SDK utility registration
+
+require_once __DIR__ . '/../core/UtilityType.php';
+require_once __DIR__ . '/Clean.php';
+require_once __DIR__ . '/Done.php';
+require_once __DIR__ . '/MakeError.php';
+require_once __DIR__ . '/FeatureAdd.php';
+require_once __DIR__ . '/FeatureHook.php';
+require_once __DIR__ . '/FeatureInit.php';
+require_once __DIR__ . '/Fetcher.php';
+require_once __DIR__ . '/MakeFetchDef.php';
+require_once __DIR__ . '/MakeContext.php';
+require_once __DIR__ . '/MakeOptions.php';
+require_once __DIR__ . '/MakeRequest.php';
+require_once __DIR__ . '/MakeResponse.php';
+require_once __DIR__ . '/MakeResult.php';
+require_once __DIR__ . '/MakePoint.php';
+require_once __DIR__ . '/MakeSpec.php';
+require_once __DIR__ . '/MakeUrl.php';
+require_once __DIR__ . '/Param.php';
+require_once __DIR__ . '/PrepareAuth.php';
+require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/PrepareHeaders.php';
+require_once __DIR__ . '/PrepareMethod.php';
+require_once __DIR__ . '/PrepareParams.php';
+require_once __DIR__ . '/PreparePath.php';
+require_once __DIR__ . '/PrepareQuery.php';
+require_once __DIR__ . '/ResultBasic.php';
+require_once __DIR__ . '/ResultBody.php';
+require_once __DIR__ . '/ResultHeaders.php';
+require_once __DIR__ . '/TransformRequest.php';
+require_once __DIR__ . '/TransformResponse.php';
+
+IbanValidationUtility::setRegistrar(function (IbanValidationUtility $u): void {
+    $u->clean = [IbanValidationClean::class, 'call'];
+    $u->done = [IbanValidationDone::class, 'call'];
+    $u->make_error = [IbanValidationMakeError::class, 'call'];
+    $u->feature_add = [IbanValidationFeatureAdd::class, 'call'];
+    $u->feature_hook = [IbanValidationFeatureHook::class, 'call'];
+    $u->feature_init = [IbanValidationFeatureInit::class, 'call'];
+    $u->fetcher = [IbanValidationFetcher::class, 'call'];
+    $u->make_fetch_def = [IbanValidationMakeFetchDef::class, 'call'];
+    $u->make_context = [IbanValidationMakeContext::class, 'call'];
+    $u->make_options = [IbanValidationMakeOptions::class, 'call'];
+    $u->make_request = [IbanValidationMakeRequest::class, 'call'];
+    $u->make_response = [IbanValidationMakeResponse::class, 'call'];
+    $u->make_result = [IbanValidationMakeResult::class, 'call'];
+    $u->make_point = [IbanValidationMakePoint::class, 'call'];
+    $u->make_spec = [IbanValidationMakeSpec::class, 'call'];
+    $u->make_url = [IbanValidationMakeUrl::class, 'call'];
+    $u->param = [IbanValidationParam::class, 'call'];
+    $u->prepare_auth = [IbanValidationPrepareAuth::class, 'call'];
+    $u->prepare_body = [IbanValidationPrepareBody::class, 'call'];
+    $u->prepare_headers = [IbanValidationPrepareHeaders::class, 'call'];
+    $u->prepare_method = [IbanValidationPrepareMethod::class, 'call'];
+    $u->prepare_params = [IbanValidationPrepareParams::class, 'call'];
+    $u->prepare_path = [IbanValidationPreparePath::class, 'call'];
+    $u->prepare_query = [IbanValidationPrepareQuery::class, 'call'];
+    $u->result_basic = [IbanValidationResultBasic::class, 'call'];
+    $u->result_body = [IbanValidationResultBody::class, 'call'];
+    $u->result_headers = [IbanValidationResultHeaders::class, 'call'];
+    $u->transform_request = [IbanValidationTransformRequest::class, 'call'];
+    $u->transform_response = [IbanValidationTransformResponse::class, 'call'];
+});
