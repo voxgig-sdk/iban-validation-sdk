@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ IbanValidationUtility::setRegistrar(function (IbanValidationUtility $u): void {
     $u->prepare_params = [IbanValidationPrepareParams::class, 'call'];
     $u->prepare_path = [IbanValidationPreparePath::class, 'call'];
     $u->prepare_query = [IbanValidationPrepareQuery::class, 'call'];
+    $u->graphql_body = [IbanValidationGraphql::class, 'body'];
+    $u->graphql_errors = [IbanValidationGraphql::class, 'errors'];
     $u->result_basic = [IbanValidationResultBasic::class, 'call'];
     $u->result_body = [IbanValidationResultBody::class, 'call'];
     $u->result_headers = [IbanValidationResultHeaders::class, 'call'];

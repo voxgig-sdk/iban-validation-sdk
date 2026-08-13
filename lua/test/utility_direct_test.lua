@@ -66,16 +66,16 @@ function utility_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["IBANVALIDATION_TEST_UTILITY_ENTID"] = {},
-    ["IBANVALIDATION_TEST_LIVE"] = "FALSE",
-    ["IBANVALIDATION_APIKEY"] = "NONE",
+    ["IBAN_VALIDATION_TEST_UTILITY_ENTID"] = {},
+    ["IBAN_VALIDATION_TEST_LIVE"] = "FALSE",
+    ["IBAN_VALIDATION_APIKEY"] = "NONE",
   })
 
-  local live = env["IBANVALIDATION_TEST_LIVE"] == "TRUE"
+  local live = env["IBAN_VALIDATION_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["IBANVALIDATION_APIKEY"],
+      apikey = env["IBAN_VALIDATION_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

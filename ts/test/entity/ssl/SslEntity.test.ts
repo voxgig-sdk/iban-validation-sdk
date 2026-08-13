@@ -26,8 +26,8 @@ import {
 describe('SslEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when IBANVALIDATION_TEST_LIVE=TRUE.
-  afterEach(liveDelay('IBANVALIDATION_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when IBAN_VALIDATION_TEST_LIVE=TRUE.
+  afterEach(liveDelay('IBAN_VALIDATION_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = IbanValidationSDK.test()
@@ -63,7 +63,7 @@ describe('SslEntity', async () => {
     const ssl_ref01_ent = client.Ssl()
     const ssl_ref01_match: any = {}
 
-    const ssl_ref01_list = await ssl_ref01_ent.list(ssl_ref01_match)
+    const ssl_ref01_list = (await ssl_ref01_ent.list(ssl_ref01_match)).map((e: any) => e.data())
 
 
   })

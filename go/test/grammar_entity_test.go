@@ -44,7 +44,7 @@ func TestGrammarEntity(t *testing.T) {
 		// The basic flow consumes synthetic IDs from the fixture. In live mode
 		// without an *_ENTID env override, those IDs hit the live API and 4xx.
 		if setup.syntheticOnly {
-			t.Skip("live entity test uses synthetic IDs from fixture — set IBANVALIDATION_TEST_GRAMMAR_ENTID JSON to run live")
+			t.Skip("live entity test uses synthetic IDs from fixture — set IBAN_VALIDATION_TEST_GRAMMAR_ENTID JSON to run live")
 			return
 		}
 		client := setup.client
@@ -58,7 +58,7 @@ func TestGrammarEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		grammarRef01Data = core.ToMapAny(grammarRef01DataResult)
+		grammarRef01Data = core.ToMapAny(entityData(grammarRef01DataResult))
 		if grammarRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
@@ -103,38 +103,38 @@ func grammarBasicSetup(extra map[string]any) *entityTestSetup {
 	// Detect ENTID env override before envOverride consumes it. When live
 	// mode is on without a real override, the basic test runs against synthetic
 	// IDs from the fixture and 4xx's. Surface this so the test can skip.
-	entidEnvRaw := os.Getenv("IBANVALIDATION_TEST_GRAMMAR_ENTID")
+	entidEnvRaw := os.Getenv("IBAN_VALIDATION_TEST_GRAMMAR_ENTID")
 	idmapOverridden := entidEnvRaw != "" && strings.HasPrefix(strings.TrimSpace(entidEnvRaw), "{")
 
 	env := envOverride(map[string]any{
-		"IBANVALIDATION_TEST_GRAMMAR_ENTID": idmap,
-		"IBANVALIDATION_TEST_LIVE":      "FALSE",
-		"IBANVALIDATION_TEST_EXPLAIN":   "FALSE",
-		"IBANVALIDATION_APIKEY":         "NONE",
+		"IBAN_VALIDATION_TEST_GRAMMAR_ENTID": idmap,
+		"IBAN_VALIDATION_TEST_LIVE":      "FALSE",
+		"IBAN_VALIDATION_TEST_EXPLAIN":   "FALSE",
+		"IBAN_VALIDATION_APIKEY":         "NONE",
 	})
 
-	idmapResolved := core.ToMapAny(env["IBANVALIDATION_TEST_GRAMMAR_ENTID"])
+	idmapResolved := core.ToMapAny(env["IBAN_VALIDATION_TEST_GRAMMAR_ENTID"])
 	if idmapResolved == nil {
 		idmapResolved = core.ToMapAny(idmap)
 	}
 
-	if env["IBANVALIDATION_TEST_LIVE"] == "TRUE" {
+	if env["IBAN_VALIDATION_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["IBANVALIDATION_APIKEY"],
+				"apikey": env["IBAN_VALIDATION_APIKEY"],
 			},
 			extra,
 		})
 		client = sdk.NewIbanValidationSDK(core.ToMapAny(mergedOpts))
 	}
 
-	live := env["IBANVALIDATION_TEST_LIVE"] == "TRUE"
+	live := env["IBAN_VALIDATION_TEST_LIVE"] == "TRUE"
 	return &entityTestSetup{
 		client:        client,
 		data:          entityData,
 		idmap:         idmapResolved,
 		env:           env,
-		explain:       env["IBANVALIDATION_TEST_EXPLAIN"] == "TRUE",
+		explain:       env["IBAN_VALIDATION_TEST_EXPLAIN"] == "TRUE",
 		live:          live,
 		syntheticOnly: live && !idmapOverridden,
 		now:           time.Now().UnixMilli(),

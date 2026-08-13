@@ -26,8 +26,8 @@ import {
 describe('DnsResultEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when IBANVALIDATION_TEST_LIVE=TRUE.
-  afterEach(liveDelay('IBANVALIDATION_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when IBAN_VALIDATION_TEST_LIVE=TRUE.
+  afterEach(liveDelay('IBAN_VALIDATION_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = IbanValidationSDK.test()
@@ -62,7 +62,7 @@ describe('DnsResultEntity', async () => {
     // LOAD
     const dns_result_ref01_ent = client.DnsResult()
     const dns_result_ref01_match_dt0: any = {}
-    const dns_result_ref01_data_dt0 = await dns_result_ref01_ent.load(dns_result_ref01_match_dt0)
+    const dns_result_ref01_data_dt0 = (await dns_result_ref01_ent.load(dns_result_ref01_match_dt0)).data()
     assert(null != dns_result_ref01_data_dt0)
 
 

@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ IbanValidationUtility.registrar = ->(u) {
   u.prepare_params = IbanValidationUtilities::PrepareParams
   u.prepare_path = IbanValidationUtilities::PreparePath
   u.prepare_query = IbanValidationUtilities::PrepareQuery
+  u.graphql_body = IbanValidationUtilities::GraphqlBody
+  u.graphql_errors = IbanValidationUtilities::GraphqlErrors
   u.result_basic = IbanValidationUtilities::ResultBasic
   u.result_body = IbanValidationUtilities::ResultBody
   u.result_headers = IbanValidationUtilities::ResultHeaders

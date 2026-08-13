@@ -19,11 +19,15 @@ import {
 describe('UtilityDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when IBANVALIDATION_TEST_LIVE=TRUE.
-  afterEach(liveDelay('IBANVALIDATION_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when IBAN_VALIDATION_TEST_LIVE=TRUE.
+  afterEach(liveDelay('IBAN_VALIDATION_TEST_LIVE'))
 
   test('direct-exists', async () => {
     const sdk = new IbanValidationSDK({
+      // Concrete base: a live construction must satisfy any server
+      // variables a templated base URL declares; overriding base with a
+      // literal (as the direct flow tests do) sidesteps the requirement.
+      base: 'http://localhost:8080',
       system: { fetch: async () => ({}) }
     })
     assert('function' === typeof sdk.direct)
@@ -76,19 +80,19 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'IBANVALIDATION_TEST_UTILITY_ENTID': {},
-    'IBANVALIDATION_TEST_LIVE': 'FALSE',
-    'IBANVALIDATION_APIKEY': 'NONE',
+    'IBAN_VALIDATION_TEST_UTILITY_ENTID': {},
+    'IBAN_VALIDATION_TEST_LIVE': 'FALSE',
+    'IBAN_VALIDATION_APIKEY': 'NONE',
   })
 
-  const live = 'TRUE' === env.IBANVALIDATION_TEST_LIVE
+  const live = 'TRUE' === env.IBAN_VALIDATION_TEST_LIVE
 
   if (live) {
     const client = new IbanValidationSDK({
-      apikey: env.IBANVALIDATION_APIKEY,
+      apikey: env.IBAN_VALIDATION_APIKEY,
     })
 
-    let idmap: any = env['IBANVALIDATION_TEST_UTILITY_ENTID']
+    let idmap: any = env['IBAN_VALIDATION_TEST_UTILITY_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

@@ -29,7 +29,7 @@ describe("GenerateEntity", function()
     -- The basic flow consumes synthetic IDs from the fixture. In live mode
     -- without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup.synthetic_only then
-      pending("live entity test uses synthetic IDs from fixture — set IBANVALIDATION_TEST_GENERATE_ENTID JSON to run live")
+      pending("live entity test uses synthetic IDs from fixture — set IBAN_VALIDATION_TEST_GENERATE_ENTID JSON to run live")
       return
     end
     local client = setup.client
@@ -84,39 +84,39 @@ function generate_basic_setup(extra)
   -- Detect ENTID env override before envOverride consumes it. When live
   -- mode is on without a real override, the basic test runs against synthetic
   -- IDs from the fixture and 4xx's. Surface this so the test can skip.
-  local entid_env_raw = os.getenv("IBANVALIDATION_TEST_GENERATE_ENTID")
+  local entid_env_raw = os.getenv("IBAN_VALIDATION_TEST_GENERATE_ENTID")
   local idmap_overridden = entid_env_raw ~= nil and entid_env_raw:match("^%s*{") ~= nil
 
   local env = runner.env_override({
-    ["IBANVALIDATION_TEST_GENERATE_ENTID"] = idmap,
-    ["IBANVALIDATION_TEST_LIVE"] = "FALSE",
-    ["IBANVALIDATION_TEST_EXPLAIN"] = "FALSE",
-    ["IBANVALIDATION_APIKEY"] = "NONE",
+    ["IBAN_VALIDATION_TEST_GENERATE_ENTID"] = idmap,
+    ["IBAN_VALIDATION_TEST_LIVE"] = "FALSE",
+    ["IBAN_VALIDATION_TEST_EXPLAIN"] = "FALSE",
+    ["IBAN_VALIDATION_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
-    env["IBANVALIDATION_TEST_GENERATE_ENTID"])
+    env["IBAN_VALIDATION_TEST_GENERATE_ENTID"])
   if idmap_resolved == nil then
     idmap_resolved = helpers.to_map(idmap)
   end
 
-  if env["IBANVALIDATION_TEST_LIVE"] == "TRUE" then
+  if env["IBAN_VALIDATION_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["IBANVALIDATION_APIKEY"],
+        apikey = env["IBAN_VALIDATION_APIKEY"],
       },
       extra or {},
     })
     client = sdk.new(helpers.to_map(merged_opts))
   end
 
-  local live = env["IBANVALIDATION_TEST_LIVE"] == "TRUE"
+  local live = env["IBAN_VALIDATION_TEST_LIVE"] == "TRUE"
   return {
     client = client,
     data = entity_data,
     idmap = idmap_resolved,
     env = env,
-    explain = env["IBANVALIDATION_TEST_EXPLAIN"] == "TRUE",
+    explain = env["IBAN_VALIDATION_TEST_EXPLAIN"] == "TRUE",
     live = live,
     synthetic_only = live and not idmap_overridden,
     now = os.time() * 1000,

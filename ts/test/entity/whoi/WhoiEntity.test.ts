@@ -26,8 +26,8 @@ import {
 describe('WhoiEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when IBANVALIDATION_TEST_LIVE=TRUE.
-  afterEach(liveDelay('IBANVALIDATION_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when IBAN_VALIDATION_TEST_LIVE=TRUE.
+  afterEach(liveDelay('IBAN_VALIDATION_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = IbanValidationSDK.test()
@@ -63,7 +63,7 @@ describe('WhoiEntity', async () => {
     const whoi_ref01_ent = client.Whoi()
     const whoi_ref01_match: any = {}
 
-    const whoi_ref01_list = await whoi_ref01_ent.list(whoi_ref01_match)
+    const whoi_ref01_list = (await whoi_ref01_ent.list(whoi_ref01_match)).map((e: any) => e.data())
 
 
   })

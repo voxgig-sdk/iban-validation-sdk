@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from ibanvalidation_sdk.utility.voxgig_struct import voxgig_struct as vs
 from ibanvalidation_sdk import IbanValidationSDK
-from core import helpers
+from ibanvalidation_sdk.core import helpers
 from test import runner
 
 
@@ -58,16 +58,16 @@ def _ssl_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "IBANVALIDATION_TEST_SSL_ENTID": {},
-        "IBANVALIDATION_TEST_LIVE": "FALSE",
-        "IBANVALIDATION_APIKEY": "NONE",
+        "IBAN_VALIDATION_TEST_SSL_ENTID": {},
+        "IBAN_VALIDATION_TEST_LIVE": "FALSE",
+        "IBAN_VALIDATION_APIKEY": "NONE",
     })
 
-    live = env.get("IBANVALIDATION_TEST_LIVE") == "TRUE"
+    live = env.get("IBAN_VALIDATION_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("IBANVALIDATION_APIKEY"),
+            "apikey": env.get("IBAN_VALIDATION_APIKEY"),
         }
         client = IbanValidationSDK(merged_opts)
         return {

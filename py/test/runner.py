@@ -4,7 +4,7 @@ from __future__ import annotations
 import os
 import json
 
-from utility.voxgig_struct import voxgig_struct as vs
+from ibanvalidation_sdk.utility.voxgig_struct import voxgig_struct as vs
 
 
 class IbanValidationTestRunner:
@@ -38,8 +38,8 @@ class IbanValidationTestRunner:
 
     @staticmethod
     def env_override(m):
-        live = IbanValidationTestRunner.getenv("IBANVALIDATION_TEST_LIVE")
-        override = IbanValidationTestRunner.getenv("IBANVALIDATION_TEST_OVERRIDE")
+        live = IbanValidationTestRunner.getenv("IBAN_VALIDATION_TEST_LIVE")
+        override = IbanValidationTestRunner.getenv("IBAN_VALIDATION_TEST_OVERRIDE")
 
         if live == "TRUE" or override == "TRUE":
             for key in list(m.keys()):
@@ -56,9 +56,9 @@ class IbanValidationTestRunner:
                             pass
                     m[key] = envval
 
-        explain = IbanValidationTestRunner.getenv("IBANVALIDATION_TEST_EXPLAIN")
+        explain = IbanValidationTestRunner.getenv("IBAN_VALIDATION_TEST_EXPLAIN")
         if explain is not None and explain != "":
-            m["IBANVALIDATION_TEST_EXPLAIN"] = explain
+            m["IBAN_VALIDATION_TEST_EXPLAIN"] = explain
 
         return m
 
@@ -111,6 +111,17 @@ class IbanValidationTestRunner:
         return 500
 
     @staticmethod
+    def entity_data(v):
+        """Extract the data map from an op result.
+
+        Every entity operation resolves to the ENTITY (see AGENTS.md), so a
+        flow test that wants the record takes this hop. A plain dict passes
+        through unchanged.
+        """
+        if hasattr(v, "data_get") and callable(v.data_get):
+            return v.data_get()
+        return v
+
     def entity_list_to_data(lst):
         out = []
         for item in lst:
@@ -132,6 +143,10 @@ def load_env_local():
 
 def env_override(m):
     return IbanValidationTestRunner.env_override(m)
+
+
+def entity_data(v):
+    return IbanValidationTestRunner.entity_data(v)
 
 
 def entity_list_to_data(lst):

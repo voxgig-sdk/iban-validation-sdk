@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# IbanValidation SDK exists test
 
 import pytest
 from ibanvalidation_sdk import IbanValidationSDK

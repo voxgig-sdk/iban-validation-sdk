@@ -65,16 +65,16 @@ def generate_direct_setup(mockres)
   calls = []
 
   env = Runner.env_override({
-    "IBANVALIDATION_TEST_GENERATE_ENTID" => {},
-    "IBANVALIDATION_TEST_LIVE" => "FALSE",
-    "IBANVALIDATION_APIKEY" => "NONE",
+    "IBAN_VALIDATION_TEST_GENERATE_ENTID" => {},
+    "IBAN_VALIDATION_TEST_LIVE" => "FALSE",
+    "IBAN_VALIDATION_APIKEY" => "NONE",
   })
 
-  live = env["IBANVALIDATION_TEST_LIVE"] == "TRUE"
+  live = env["IBAN_VALIDATION_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
-      "apikey" => env["IBANVALIDATION_APIKEY"],
+      "apikey" => env["IBAN_VALIDATION_APIKEY"],
     }
     client = IbanValidationSDK.new(merged_opts)
     return {

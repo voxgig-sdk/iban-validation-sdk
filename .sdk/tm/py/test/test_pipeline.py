@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import IbanValidationSDK
-from core.error import IbanValidationError
-from core.result import IbanValidationResult
-from core.response import IbanValidationResponse
-from core.spec import IbanValidationSpec
-from feature.base_feature import IbanValidationBaseFeature
+from projectname_sdk.core.error import IbanValidationError
+from projectname_sdk.core.result import IbanValidationResult
+from projectname_sdk.core.response import IbanValidationResponse
+from projectname_sdk.core.spec import IbanValidationSpec
+from projectname_sdk.feature.base_feature import IbanValidationBaseFeature
 
 
 def _client():

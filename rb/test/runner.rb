@@ -23,8 +23,8 @@ module IbanValidationTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("IBANVALIDATION_TEST_LIVE")
-    override = getenv("IBANVALIDATION_TEST_OVERRIDE")
+    live = getenv("IBAN_VALIDATION_TEST_LIVE")
+    override = getenv("IBAN_VALIDATION_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module IbanValidationTestRunner
       end
     end
 
-    explain = getenv("IBANVALIDATION_TEST_EXPLAIN")
-    m["IBANVALIDATION_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("IBAN_VALIDATION_TEST_EXPLAIN")
+    m["IBAN_VALIDATION_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end
