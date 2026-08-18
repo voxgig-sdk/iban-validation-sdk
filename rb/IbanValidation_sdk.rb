@@ -28,7 +28,7 @@ class IbanValidationSDK
     utility = IbanValidationUtility.new
     @_utility = utility
 
-    config = IbanValidationConfig.make_config
+    config = IbanValidationConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

@@ -33,7 +33,7 @@ class WhoiEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = IbanValidationConfig.make_config
+    cfg = IbanValidationConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = IbanValidationSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []

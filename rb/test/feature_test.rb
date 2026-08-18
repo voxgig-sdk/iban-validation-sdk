@@ -15,7 +15,7 @@ require_relative "../IbanValidation_sdk"
 module IbanValidationFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = IbanValidationConfig.make_config["feature"]
+    f = IbanValidationConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 

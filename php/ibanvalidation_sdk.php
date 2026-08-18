@@ -40,7 +40,7 @@ class IbanValidationSDK
         $utility = new IbanValidationUtility();
         $this->_utility = $utility;
 
-        $config = IbanValidationConfig::make_config();
+        $config = IbanValidationConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,
