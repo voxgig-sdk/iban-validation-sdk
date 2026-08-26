@@ -42,6 +42,7 @@ class IbanValidationConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [
