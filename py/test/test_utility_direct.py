@@ -63,15 +63,18 @@ def _utility_direct_setup(mockres):
     env = runner.env_override({
         "IBAN_VALIDATION_TEST_UTILITY_ENTID": {},
         "IBAN_VALIDATION_TEST_LIVE": "FALSE",
-        "IBAN_VALIDATION_APIKEY": "NONE",
+        "IBAN_VALIDATION_APIKEY": "",
     })
 
     live = env.get("IBAN_VALIDATION_TEST_LIVE") == "TRUE"
 
     if live:
-        merged_opts = {
+        # sdk-test-control.json's test.client.options seeds the live
+        # client; the generated fields below overwrite anything they name.
+        merged_opts = dict(runner.live_client_options())
+        merged_opts.update({
             "apikey": env.get("IBAN_VALIDATION_APIKEY"),
-        }
+        })
         client = IbanValidationSDK(merged_opts)
         return {
             "client": client,

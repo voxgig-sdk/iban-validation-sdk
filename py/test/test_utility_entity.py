@@ -90,7 +90,7 @@ def _utility_basic_setup(extra):
         "IBAN_VALIDATION_TEST_UTILITY_ENTID": idmap,
         "IBAN_VALIDATION_TEST_LIVE": "FALSE",
         "IBAN_VALIDATION_TEST_EXPLAIN": "FALSE",
-        "IBAN_VALIDATION_APIKEY": "NONE",
+        "IBAN_VALIDATION_APIKEY": "",
     })
 
     idmap_resolved = helpers.to_map(
@@ -100,6 +100,10 @@ def _utility_basic_setup(extra):
 
     if env.get("IBAN_VALIDATION_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
+            # FIRST, so the generated fields below win: sdk-test-control.json's
+            # test.client.options adds to the live client, it does not
+            # redirect it.
+            runner.live_client_options(),
             {
                 "apikey": env.get("IBAN_VALIDATION_APIKEY"),
             },

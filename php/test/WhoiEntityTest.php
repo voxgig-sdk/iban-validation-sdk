@@ -124,7 +124,7 @@ function whoi_basic_setup($extra)
         "IBAN_VALIDATION_TEST_WHOI_ENTID" => $idmap,
         "IBAN_VALIDATION_TEST_LIVE" => "FALSE",
         "IBAN_VALIDATION_TEST_EXPLAIN" => "FALSE",
-        "IBAN_VALIDATION_APIKEY" => "NONE",
+        "IBAN_VALIDATION_APIKEY" => "",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -135,10 +135,17 @@ function whoi_basic_setup($extra)
 
     if ($env["IBAN_VALIDATION_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
+            // FIRST, so the generated fields below win: sdk-test-control.json's
+            // test.client.options adds to the live client, it does not redirect it.
+            Runner::live_client_options(),
             [
                 "apikey" => $env["IBAN_VALIDATION_APIKEY"],
             ],
-            $extra ?? [],
+            // ismap, not a plain "?? []" default: an empty PHP array is a
+            // LIST, and a non-map later entry REPLACES the accumulated map in
+            // merge - so the no-extras call discarded live_client_options()
+            // and the apikey/server map above it.
+            Vs::ismap($extra) ? $extra : new \stdClass(),
         ]);
         $client = new IbanValidationSDK(Helpers::to_map($merged_opts));
     }
