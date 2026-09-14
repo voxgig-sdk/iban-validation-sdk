@@ -105,7 +105,7 @@ local result, err = client:Utility():load({ input = "example" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/iban-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/iban-validation-sdk/releases) |
+| TypeScript | `@voxgig-sdk/iban-validation-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/iban-validation-sdk/releases) |
 | Python | `voxgig-sdk-iban-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/iban-validation-sdk/releases) |
 | PHP | `voxgig-sdk/iban-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/iban-validation-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/iban-validation-sdk/go` | `go get github.com/voxgig-sdk/iban-validation-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:Utility():load({ input = "example" })
 ### TypeScript
 
 ```ts
-import { IbanValidationSDK } from '@voxgig-sdk/iban-validation'
+import { IbanValidationSDK } from '@voxgig-sdk/iban-validation-sdk'
 
 const client = new IbanValidationSDK({
   apikey: process.env.IBAN_VALIDATION_APIKEY,

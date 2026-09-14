@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { IbanValidationSDK } from '@voxgig-sdk/iban-validation'
+import { IbanValidationSDK } from '@voxgig-sdk/iban-validation-sdk'
 
 const client = new IbanValidationSDK({
   apikey: process.env.IBAN_VALIDATION_APIKEY,
@@ -805,7 +805,7 @@ iban-validation/
 Import the SDK from the package root:
 
 ```ts
-import { IbanValidationSDK } from '@voxgig-sdk/iban-validation'
+import { IbanValidationSDK } from '@voxgig-sdk/iban-validation-sdk'
 ```
 
 ### Entity state
