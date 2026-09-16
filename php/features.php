@@ -4,7 +4,10 @@ declare(strict_types=1);
 // IbanValidation SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class IbanValidationFeatures
@@ -14,8 +17,14 @@ class IbanValidationFeatures
         switch ($name) {
             case "base":
                 return new IbanValidationBaseFeature();
+            case "ratelimit":
+                return new IbanValidationRatelimitFeature();
+            case "retry":
+                return new IbanValidationRetryFeature();
             case "test":
                 return new IbanValidationTestFeature();
+            case "timeout":
+                return new IbanValidationTimeoutFeature();
             default:
                 return new IbanValidationBaseFeature();
         }
@@ -31,7 +40,10 @@ class IbanValidationFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

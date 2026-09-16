@@ -1,12 +1,18 @@
 # IbanValidation SDK feature factory
 
 from ibanvalidation_sdk.feature.base_feature import IbanValidationBaseFeature
+from ibanvalidation_sdk.feature.ratelimit_feature import IbanValidationRatelimitFeature
+from ibanvalidation_sdk.feature.retry_feature import IbanValidationRetryFeature
 from ibanvalidation_sdk.feature.test_feature import IbanValidationTestFeature
+from ibanvalidation_sdk.feature.timeout_feature import IbanValidationTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: IbanValidationBaseFeature(),
+    "ratelimit": lambda: IbanValidationRatelimitFeature(),
+    "retry": lambda: IbanValidationRetryFeature(),
     "test": lambda: IbanValidationTestFeature(),
+    "timeout": lambda: IbanValidationTimeoutFeature(),
 }
 
 
