@@ -105,12 +105,12 @@ local result, err = client:Utility():load({ input = "example" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/iban-validation-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/iban-validation-sdk/releases) |
-| Python | `voxgig-sdk-iban-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/iban-validation-sdk/releases) |
-| PHP | `voxgig-sdk/iban-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/iban-validation-sdk/releases) |
+| TypeScript | `@voxgig-sdk/iban-validation-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/iban-validation-sdk/tags) |
+| Python | `voxgig-sdk-iban-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/iban-validation-sdk/tags) |
+| PHP | `voxgig-sdk/iban-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/iban-validation-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/iban-validation-sdk/go` | `go get github.com/voxgig-sdk/iban-validation-sdk/go@latest` |
-| Ruby | `voxgig-sdk-iban-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/iban-validation-sdk/releases) |
-| Lua | `voxgig-sdk-iban-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/iban-validation-sdk/releases) |
+| Ruby | `voxgig-sdk-iban-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/iban-validation-sdk/tags) |
+| Lua | `voxgig-sdk-iban-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/iban-validation-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/iban-validation-sdk/go-cli` | `go install github.com/voxgig-sdk/iban-validation-sdk/go-cli/cmd/iban-validation@latest` |
 | Go MCP server | `github.com/voxgig-sdk/iban-validation-sdk/go-mcp` | `go get github.com/voxgig-sdk/iban-validation-sdk/go-mcp@latest` |
 
