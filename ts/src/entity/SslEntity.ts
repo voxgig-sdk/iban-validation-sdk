@@ -19,7 +19,6 @@ import type {
   SslListMatch,
 } from '../IbanValidationTypes'
 
-// TODO: needs Entity superclass
 class SslEntity extends IbanValidationEntityBase<Ssl> {
 
   constructor(client: IbanValidationSDK, entopts: any) {

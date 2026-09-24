@@ -19,7 +19,6 @@ import type {
   DomainListMatch,
 } from '../IbanValidationTypes'
 
-// TODO: needs Entity superclass
 class DomainEntity extends IbanValidationEntityBase<Domain> {
 
   constructor(client: IbanValidationSDK, entopts: any) {

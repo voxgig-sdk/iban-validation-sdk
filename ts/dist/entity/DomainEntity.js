@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DomainEntity = void 0;
 const IbanValidationEntityBase_1 = require("../IbanValidationEntityBase");
-// TODO: needs Entity superclass
 class DomainEntity extends IbanValidationEntityBase_1.IbanValidationEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

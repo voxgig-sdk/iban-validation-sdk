@@ -19,7 +19,6 @@ import type {
   WhoiListMatch,
 } from '../IbanValidationTypes'
 
-// TODO: needs Entity superclass
 class WhoiEntity extends IbanValidationEntityBase<Whoi> {
 
   constructor(client: IbanValidationSDK, entopts: any) {
